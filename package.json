@@ -1,0 +1,28 @@
+{
+  "name": "react-native-infinite-scroll-view",
+  "version": "0.0.1",
+  "description": "An infinitely scrolling view that notifies you as the scroll offset approaches the bottom",
+  "main": "InfiniteScrollView.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exponentjs/react-native-infinite-scroll-view.git"
+  },
+  "keywords": [
+    "react-native",
+    "infinite",
+    "pagination",
+    "scroll-view"
+  ],
+  "author": "James Ide <ide@exp.host>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/exponentjs/react-native-infinite-scroll-view/issues"
+  },
+  "homepage": "https://github.com/exponentjs/react-native-infinite-scroll-view#readme",
+  "dependencies": {
+    "react-native-scrollable-mixin": "0.0.3"
+  }
+}
