@@ -12,8 +12,6 @@ let {
 
 let DefaultLoadingIndicator = require('./DefaultLoadingIndicator');
 
-const SCROLL_VIEW_REF = 'scrollView';
-
 let InfiniteScrollView = React.createClass({
   mixins: [ScrollableMixin],
 
@@ -38,11 +36,11 @@ let InfiniteScrollView = React.createClass({
   },
 
   getScrollResponder(): ReactComponent {
-    return this.refs[SCROLL_VIEW_REF].getScrollResponder();
+    return this._scrollComponent.getScrollResponder();
   },
 
   setNativeProps(props) {
-    this.refs[SCROLL_VIEW_REF].setNativeProps(props);
+    this._scrollComponent.setNativeProps(props);
   },
 
   render() {
@@ -59,8 +57,23 @@ let InfiniteScrollView = React.createClass({
       children: [this.props.children, loadingIndicator],
     });
 
+    let scrollComponent = renderScrollComponent(props);
+    let originalRef = scrollComponent.ref;
+    if (originalRef != null && typeof originalRef !== 'function') {
+      console.warn(
+        'String refs are not supported for composed scroll components. Use a ' +
+        'callback ref instead. Ignoring ref: ' + originalRef
+      );
+      originalRef = null;
+    }
+
     return React.cloneElement(renderScrollComponent(props), {
-      ref: SCROLL_VIEW_REF,
+      ref: component => {
+        this._scrollComponent = component;
+        if (originalRef) {
+          originalRef(component);
+        }
+      },
     });
   },
 
