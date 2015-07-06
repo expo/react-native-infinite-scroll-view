@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/exponentjs/react-native-infinite-scroll-view#readme",
   "dependencies": {
+    "react-native-clone-referenced-element": "^1.0.0",
     "react-native-scrollable-mixin": "0.0.3"
   }
 }
