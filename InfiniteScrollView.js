@@ -10,6 +10,8 @@ let {
   ScrollView,
 } = React;
 
+let cloneReferencedElement = require('react-native-clone-referenced-element');
+
 let DefaultLoadingIndicator = require('./DefaultLoadingIndicator');
 
 let InfiniteScrollView = React.createClass({
@@ -22,7 +24,6 @@ let InfiniteScrollView = React.createClass({
     isLoadingMore: PropTypes.bool.isRequired,
     onLoadMore: PropTypes.func.isRequired,
     renderLoadingIndicator: PropTypes.func.isRequired,
-    renderScrollComponent: PropTypes.func.isRequired,
   },
 
   getDefaultProps() {
@@ -45,7 +46,10 @@ let InfiniteScrollView = React.createClass({
 
   render() {
     if (this.props.isLoadingMore) {
-      var loadingIndicator = this.props.renderLoadingIndicator();
+      var loadingIndicator = React.cloneElement(
+        this.props.renderLoadingIndicator(),
+        { key: 'loading-indicator' },
+      );
     }
 
     let {
@@ -57,23 +61,8 @@ let InfiniteScrollView = React.createClass({
       children: [this.props.children, loadingIndicator],
     });
 
-    let scrollComponent = renderScrollComponent(props);
-    let originalRef = scrollComponent.ref;
-    if (originalRef != null && typeof originalRef !== 'function') {
-      console.warn(
-        'String refs are not supported for composed scroll components. Use a ' +
-        'callback ref instead. Ignoring ref: ' + originalRef
-      );
-      originalRef = null;
-    }
-
-    return React.cloneElement(renderScrollComponent(props), {
-      ref: component => {
-        this._scrollComponent = component;
-        if (originalRef) {
-          originalRef(component);
-        }
-      },
+    return cloneReferencedElement(renderScrollComponent(props), {
+      ref: component => { this._scrollComponent = component; },
     });
   },
 
