@@ -14,35 +14,32 @@ let cloneReferencedElement = require('react-native-clone-referenced-element');
 
 let DefaultLoadingIndicator = require('./DefaultLoadingIndicator');
 
-let InfiniteScrollView = React.createClass({
-  mixins: [ScrollableMixin],
-
-  propTypes: {
+class InfiniteScrollView {
+  static propTypes = {
     ...ScrollView.propTypes,
     distanceToLoadMore: PropTypes.number.isRequired,
     canLoadMore: PropTypes.bool.isRequired,
     isLoadingMore: PropTypes.bool.isRequired,
     onLoadMore: PropTypes.func.isRequired,
     renderLoadingIndicator: PropTypes.func.isRequired,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      distanceToLoadMore: 1000,
-      canLoadMore: false,
-      scrollEventThrottle: 100,
-      renderLoadingIndicator: () => <DefaultLoadingIndicator />,
-      renderScrollComponent: props => <ScrollView {...props} />,
-    };
-  },
+  static defaultProps = {
+    distanceToLoadMore: 1000,
+    canLoadMore: false,
+    isLoadingMore: false,
+    scrollEventThrottle: 100,
+    renderLoadingIndicator: () => <DefaultLoadingIndicator />,
+    renderScrollComponent: props => <ScrollView {...props} />,
+  };
 
   getScrollResponder(): ReactComponent {
     return this._scrollComponent.getScrollResponder();
-  },
+  }
 
-  setNativeProps(props) {
-    this._scrollComponent.setNativeProps(props);
-  },
+  setNativeProps(nativeProps) {
+    this._scrollComponent.setNativeProps(nativeProps);
+  }
 
   render() {
     if (this.props.isLoadingMore) {
@@ -64,7 +61,7 @@ let InfiniteScrollView = React.createClass({
     return cloneReferencedElement(renderScrollComponent(props), {
       ref: component => { this._scrollComponent = component; },
     });
-  },
+  }
 
   _handleScroll(event) {
     if (this.props.onScroll) {
@@ -78,7 +75,7 @@ let InfiniteScrollView = React.createClass({
     if (this._distanceFromEnd(event) < this.props.distanceToLoadMore) {
       this.props.onLoadMore();
     }
-  },
+  }
 
   _distanceFromEnd(event): number {
     let {
@@ -101,7 +98,9 @@ let InfiniteScrollView = React.createClass({
     }
 
     return contentLength + trailingInset - scrollOffset - viewportLength;
-  },
-});
+  }
+}
+
+Object.assign(InfiniteScrollView.prototype, ScrollableMixin);
 
 module.exports = InfiniteScrollView;

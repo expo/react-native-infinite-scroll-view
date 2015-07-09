@@ -38,12 +38,10 @@ render() {
 }
 ```
 
-**NOTE:** When inverting a ListView, you must create a ListView that delegates to an InvertibleScrollView as shown above and not the other way around. Otherwise it will not be able to invert the rows and the content will look upside down. This is true for any scroll view that adds its own children, not just ListView.
-
 ## Tips and Caveats
 
 - Horizontal scroll views are supported
-- Scroll views that specify their children (ex: ListViews) must delegate to InfiniteScrollView so that InfiniteScrollView can add the loading indicator to the list of children
+- When you load more content in an infinite ListView, the ListView by default will render only one row per frame. This means that for a short amount of time after loading new content, the user could still be very close to the bottom of the scroll view and may trigger a second load.
 
 ## Implementation
 
