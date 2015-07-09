@@ -54,7 +54,7 @@ class InfiniteScrollView {
       ...props,
     } = this.props;
     Object.assign(props, {
-      onScroll: this._handleScroll,
+      onScroll: this._handleScroll.bind(this),
       children: [this.props.children, loadingIndicator],
     });
 
