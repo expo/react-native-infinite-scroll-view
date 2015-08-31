@@ -1,4 +1,4 @@
-# InfiniteScrollView
+# InfiniteScrollView [![Slack](http://slack.exponentjs.com/badge.svg)](http://slack.exponentjs.com)
 
 InfiniteScrollView is a React Native scroll view that notifies you as the scroll offset approaches the bottom. You can instruct it to display a loading indicator while you load more content. This is a common design in feeds. InfiniteScrollView also supports horizontal scroll views.
 
