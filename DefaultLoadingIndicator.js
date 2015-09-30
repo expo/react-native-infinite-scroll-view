@@ -6,6 +6,8 @@
 let React = require('react-native');
 let {
   ActivityIndicatorIOS,
+  Platform,
+  ProgressBarAndroid
   StyleSheet,
   View,
 } = React;
@@ -14,7 +16,11 @@ class DefaultLoadingIndicator extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicatorIOS />
+        {
+          Platform.OS === 'android' ?
+            <ActivityIndicatorIOS /> :
+            <ProgressBarAndroid styleAttr="Small" />
+        }
       </View>
     );
   }
