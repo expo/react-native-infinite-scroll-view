@@ -1,6 +1,3 @@
-/**
- * @flow
- */
 'use strict';
 
 let React = require('react-native');
@@ -26,7 +23,7 @@ class DefaultLoadingIndicator extends React.Component {
   }
 }
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
