@@ -28,7 +28,7 @@ class InfiniteScrollView extends React.Component {
     distanceToLoadMore: 1500,
     canLoadMore: false,
     isLoadingMore: false,
-    scrollEventThrottle: 16,
+    scrollEventThrottle: 100,
     renderLoadingIndicator: () => <DefaultLoadingIndicator />,
     renderLoadingErrorIndicator: () => <View />,
     renderScrollComponent: props => <ScrollView {...props} />,
@@ -94,7 +94,7 @@ class InfiniteScrollView extends React.Component {
   }
 
   _onLoadMore() {
-    this.props.onLoadMoreAsync().catch((error) => {
+    this.props.onLoadMoreAsync().catch(error => {
       this.props.onLoadError && this.props.onLoadError(error);
       this.setState({isDisplayingError: true});
     });
