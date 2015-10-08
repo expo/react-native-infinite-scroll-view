@@ -8,6 +8,7 @@ let {
   View,
 } = React;
 
+let autobind = require('autobind-decorator');
 let cloneReferencedElement = require('react-native-clone-referenced-element');
 
 let DefaultLoadingIndicator = require('./DefaultLoadingIndicator');
@@ -17,7 +18,6 @@ class InfiniteScrollView extends React.Component {
     ...ScrollView.propTypes,
     distanceToLoadMore: PropTypes.number.isRequired,
     canLoadMore: PropTypes.bool.isRequired,
-    isLoadingMore: PropTypes.bool.isRequired,
     onLoadError: PropTypes.func,
     onLoadMoreAsync: PropTypes.func.isRequired,
     renderLoadingIndicator: PropTypes.func.isRequired,
@@ -27,7 +27,6 @@ class InfiniteScrollView extends React.Component {
   static defaultProps = {
     distanceToLoadMore: 1500,
     canLoadMore: false,
-    isLoadingMore: false,
     scrollEventThrottle: 100,
     renderLoadingIndicator: () => <DefaultLoadingIndicator />,
     renderLoadingErrorIndicator: () => <View />,
@@ -55,7 +54,9 @@ class InfiniteScrollView extends React.Component {
 
     if (this.state.isDisplayingError) {
       statusIndicator = React.cloneElement(
-        this.props.renderLoadingErrorIndicator(this._retryOnLoadMore.bind(this)),
+        this.props.renderLoadingErrorIndicator(
+          { onRetryLoadMore: this._onLoadMoreAsync }
+         ),
         { key: 'loading-error-indicator' },
       );
     } else if (this.props.canLoadMore) {
@@ -84,25 +85,30 @@ class InfiniteScrollView extends React.Component {
       this.props.onScroll(event);
     }
 
-    if (this.props.isLoadingMore || !this.props.canLoadMore) {
+    if (this.state.isLoading || !this.props.canLoadMore || this.state.isDisplayingError) {
       return;
     }
 
     if (this._distanceFromEnd(event) < this.props.distanceToLoadMore) {
-      this._onLoadMore();
+      this._onLoadMoreAsync();
     }
   }
 
-  _onLoadMore() {
-    this.props.onLoadMoreAsync().catch(error => {
-      this.props.onLoadError && this.props.onLoadError(error);
-      this.setState({isDisplayingError: true});
-    });
-  }
+  @autobind
+  async _onLoadMoreAsync() {
+    if (this.state.isLoading && __DEV__) {
+      throw new Error('_onLoadMoreAsync called while isLoading is true');
+    }
 
-  _retryOnLoadMore() {
-    this.setState({isDisplayingError: false});
-    this._onLoadMore();
+    try {
+      this.setState({isDisplayingError: false, isLoading: true});
+      await this.props.onLoadMoreAsync();
+    } catch(e) {
+      this.props.onLoadError && this.props.onLoadError(e);
+      this.setState({isDisplayingError: true});
+    } finally {
+      this.setState({isLoading: false});
+    }
   }
 
   _distanceFromEnd(event): number {
