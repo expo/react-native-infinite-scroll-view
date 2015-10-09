@@ -85,7 +85,8 @@ class InfiniteScrollView extends React.Component {
       this.props.onScroll(event);
     }
 
-    if (this.state.isLoading || !this.props.canLoadMore || this.state.isDisplayingError) {
+    if (this.state.isLoading || !this.props.canLoadMore ||
+        this.state.isDisplayingError) {
       return;
     }
 
@@ -103,7 +104,7 @@ class InfiniteScrollView extends React.Component {
     try {
       this.setState({isDisplayingError: false, isLoading: true});
       await this.props.onLoadMoreAsync();
-    } catch(e) {
+    } catch (e) {
       this.props.onLoadError && this.props.onLoadError(e);
       this.setState({isDisplayingError: true});
     } finally {
