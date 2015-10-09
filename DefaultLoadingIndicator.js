@@ -4,7 +4,7 @@ let React = require('react-native');
 let {
   ActivityIndicatorIOS,
   Platform,
-  ProgressBarAndroid
+  ProgressBarAndroid,
   StyleSheet,
   View,
 } = React;
