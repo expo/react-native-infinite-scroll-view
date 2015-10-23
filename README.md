@@ -9,8 +9,19 @@ It conforms to [ScrollableMixin](https://github.com/exponentjs/react-native-scro
 ## Installation
 Make sure you have react-native 0.8.0-rc.
 
-```
+```sh
 npm install react-native-infinite-scroll-view
+```
+
+Configure your .babelrc file:
+
+```json
+{
+  "whitelist": [
+    "es7.classProperties",
+    "es7.decorators"
+  ]
+}
 ```
 
 ## Usage
