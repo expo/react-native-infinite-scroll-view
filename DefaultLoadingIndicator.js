@@ -14,7 +14,7 @@ class DefaultLoadingIndicator extends React.Component {
     return (
       <View style={styles.container}>
         {
-          Platform.OS === 'android' ?
+          Platform.OS === 'ios' ?
             <ActivityIndicatorIOS /> :
             <ProgressBarAndroid styleAttr="Small" />
         }
