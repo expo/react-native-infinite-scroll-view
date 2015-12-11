@@ -92,7 +92,9 @@ class InfiniteScrollView extends React.Component {
     }
 
     if (this._distanceFromEnd(event) < this.props.distanceToLoadMore) {
-      this._onLoadMoreAsync();
+      this._onLoadMoreAsync().catch(error => {
+        console.error('Unexpected error while loading more content:', error);
+      });
     }
   }
 
