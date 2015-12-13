@@ -7,22 +7,12 @@ It conforms to [ScrollableMixin](https://github.com/exponentjs/react-native-scro
 [![npm package](https://nodei.co/npm/react-native-infinite-scroll-view.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-native-infinite-scroll-view/)
 
 ## Installation
-Make sure you have react-native 0.8.0-rc.
 
 ```sh
 npm install react-native-infinite-scroll-view
 ```
 
-Configure your .babelrc file:
-
-```json
-{
-  "whitelist": [
-    "es7.classProperties",
-    "es7.decorators"
-  ]
-}
-```
+Configure your .babelrc file to enable class properties. This is enabled by default in React Native 0.16+.
 
 ## Usage
 
