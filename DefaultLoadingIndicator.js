@@ -1,13 +1,12 @@
 'use strict';
 
-let React = require('react-native');
-let {
+import React, {
   ActivityIndicatorIOS,
   Platform,
   ProgressBarAndroid,
   StyleSheet,
   View,
-} = React;
+} from 'react-native';
 
 class DefaultLoadingIndicator extends React.Component {
   render() {

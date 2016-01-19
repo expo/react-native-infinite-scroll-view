@@ -1,16 +1,16 @@
 'use strict';
 
 let React = require('react-native');
-let ScrollableMixin = require('react-native-scrollable-mixin');
-let {
+import React, {
   PropTypes,
   ScrollView,
   View,
-} = React;
+} from 'react-native';
+import ScrollableMixin from 'react-native-scrollable-mixin';
 
-let cloneReferencedElement = require('react-native-clone-referenced-element');
+import cloneReferencedElement from 'react-clone-referenced-element';
 
-let DefaultLoadingIndicator = require('./DefaultLoadingIndicator');
+import DefaultLoadingIndicator from './DefaultLoadingIndicator';
 
 class InfiniteScrollView extends React.Component {
   static propTypes = {
