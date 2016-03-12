@@ -38,7 +38,7 @@ class InfiniteScrollView extends React.Component {
       isDisplayingError: false,
     };
 
-    this._onLoadMoreAsync = this._onLoadMoreAsync.bind(this);
+    this._loadMoreAsync = this._loadMoreAsync.bind(this);
   }
 
   getScrollResponder(): ReactComponent {
@@ -55,7 +55,7 @@ class InfiniteScrollView extends React.Component {
     if (this.state.isDisplayingError) {
       statusIndicator = React.cloneElement(
         this.props.renderLoadingErrorIndicator(
-          { onRetryLoadMore: this._onLoadMoreAsync }
+          { onRetryLoadMore: this._loadMoreAsync }
          ),
         { key: 'loading-error-indicator' },
       );
@@ -85,21 +85,23 @@ class InfiniteScrollView extends React.Component {
       this.props.onScroll(event);
     }
 
-    if (this.state.isLoading || !this.props.canLoadMore ||
-        this.state.isDisplayingError) {
-      return;
-    }
-
-    if (this._distanceFromEnd(event) < this.props.distanceToLoadMore) {
-      this._onLoadMoreAsync().catch(error => {
+    if (this._shouldLoadMore(event)) {
+      this._loadMoreAsync().catch(error => {
         console.error('Unexpected error while loading more content:', error);
       });
     }
   }
 
-  async _onLoadMoreAsync() {
+  _shouldLoadMore(event) {
+    return !this.state.isLoading &&
+      !this.props.canLoadMore &&
+      !this.state.isDisplayingError &&
+      this._distanceFromEnd(event) < this.props.distanceToLoadMore;
+  }
+
+  async _loadMoreAsync() {
     if (this.state.isLoading && __DEV__) {
-      throw new Error('_onLoadMoreAsync called while isLoading is true');
+      throw new Error('_loadMoreAsync called while isLoading is true');
     }
 
     try {
