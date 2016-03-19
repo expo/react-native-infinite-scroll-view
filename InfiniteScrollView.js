@@ -59,7 +59,7 @@ class InfiniteScrollView extends React.Component {
          ),
         { key: 'loading-error-indicator' },
       );
-    } else if (this.props.canLoadMore) {
+    } else if (this.state.isLoading) {
       statusIndicator = React.cloneElement(
         this.props.renderLoadingIndicator(),
         { key: 'loading-indicator' },
