@@ -94,7 +94,7 @@ class InfiniteScrollView extends React.Component {
 
   _shouldLoadMore(event) {
     return !this.state.isLoading &&
-      !this.props.canLoadMore &&
+      this.props.canLoadMore &&
       !this.state.isDisplayingError &&
       this._distanceFromEnd(event) < this.props.distanceToLoadMore;
   }
