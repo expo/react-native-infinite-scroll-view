@@ -70,6 +70,7 @@ class InfiniteScrollView extends React.Component {
       renderScrollComponent,
       ...props,
     } = this.props;
+
     Object.assign(props, {
       onScroll: this._handleScroll.bind(this),
       children: [this.props.children, statusIndicator],
@@ -116,18 +117,23 @@ class InfiniteScrollView extends React.Component {
   }
 
   _distanceFromEnd(event): number {
-    let {
+    const {
       contentSize,
       contentInset,
       contentOffset,
       layoutMeasurement,
     } = event.nativeEvent;
 
+    let contentLength,
+        trailingInset,
+        scrollOffset,
+        viewportLength;
+
     if (this.props.horizontal) {
-      var contentLength = contentSize.width;
-      var trailingInset = contentInset.right;
-      var scrollOffset = contentOffset.x;
-      var viewportLength = layoutMeasurement.width;
+      contentLength = contentSize.width;
+      trailingInset = contentInset.right;
+      scrollOffset = contentOffset.x;
+      viewportLength = layoutMeasurement.width;
     } else {
       contentLength = contentSize.height;
       trailingInset = contentInset.bottom;
