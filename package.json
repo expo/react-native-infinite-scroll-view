@@ -4,7 +4,8 @@
   "description": "An infinitely scrolling view that notifies you as the scroll offset approaches the bottom",
   "main": "InfiniteScrollView.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,11 @@
   "dependencies": {
     "react-clone-referenced-element": "^1.0.1",
     "react-native-scrollable-mixin": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.0.2",
+    "eslint": "^2.7.0",
+    "eslint-config-exponent": "^1.0.8",
+    "eslint-plugin-react": "^4.3.0"
   }
 }
