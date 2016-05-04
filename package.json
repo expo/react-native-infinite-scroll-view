@@ -28,9 +28,9 @@
     "react-native-scrollable-mixin": "^1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
-    "eslint": "^2.7.0",
+    "babel-eslint": "^6.0.4",
+    "eslint": "^2.9.0",
     "eslint-config-exponent": "^1.0.8",
-    "eslint-plugin-react": "^4.3.0"
+    "eslint-plugin-react": "^5.0.1"
   }
 }
