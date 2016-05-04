@@ -1,6 +1,7 @@
 'use strict';
 
-import React, {
+import React from 'react';
+import {
   ActivityIndicatorIOS,
   Platform,
   ProgressBarAndroid,
@@ -8,7 +9,7 @@ import React, {
   View,
 } from 'react-native';
 
-class DefaultLoadingIndicator extends React.Component {
+export default class DefaultLoadingIndicator extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -31,5 +32,3 @@ let styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-module.exports = DefaultLoadingIndicator;

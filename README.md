@@ -12,18 +12,17 @@ It conforms to [ScrollableMixin](https://github.com/exponentjs/react-native-scro
 npm install react-native-infinite-scroll-view
 ```
 
-Configure your .babelrc file to enable class properties. This is enabled by default in React Native 0.16+.
-
 ## Usage
 
 Compose InfiniteScrollView with the scrollable component that you would like to get events from. In the case of a ListView, you would write:
 
 ```js
-var React = require('react-native');
-var InfiniteScrollView = require('react-native-infinite-scroll-view');
-var {
+import React from 'react';
+import {
   ListView,
-} = React;
+} from 'react-native';
+import InfiniteScrollView from 'react-native-infinite-scroll-view';
+
 
 // Inside of a component's render() method:
 render() {
@@ -33,7 +32,7 @@ render() {
       dataSource={...}
       renderRow={...}
       canLoadMore={this.state.canLoadMoreContent}
-      isLoadingMore={this.state.isLoadingContent}
+      onLoadMoreAsync={this._loadMoreContentAsync()}
     />
   );
 }

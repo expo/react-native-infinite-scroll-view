@@ -2,6 +2,8 @@
 
 import React, {
   PropTypes,
+} from 'react';
+import {
   ScrollView,
   View,
 } from 'react-native';
@@ -11,7 +13,7 @@ import cloneReferencedElement from 'react-clone-referenced-element';
 
 import DefaultLoadingIndicator from './DefaultLoadingIndicator';
 
-class InfiniteScrollView extends React.Component {
+export default class InfiniteScrollView extends React.Component {
   static propTypes = {
     ...ScrollView.propTypes,
     distanceToLoadMore: PropTypes.number.isRequired,
@@ -56,7 +58,7 @@ class InfiniteScrollView extends React.Component {
       statusIndicator = React.cloneElement(
         this.props.renderLoadingErrorIndicator(
           { onRetryLoadMore: this._loadMoreAsync }
-         ),
+        ),
         { key: 'loading-error-indicator' },
       );
     } else if (this.state.isLoading) {
@@ -125,11 +127,15 @@ class InfiniteScrollView extends React.Component {
       layoutMeasurement,
     } = event.nativeEvent;
 
+    let contentLength;
+    let trailingInset;
+    let scrollOffset;
+    let viewportLength;
     if (this.props.horizontal) {
-      var contentLength = contentSize.width;
-      var trailingInset = contentInset.right;
-      var scrollOffset = contentOffset.x;
-      var viewportLength = layoutMeasurement.width;
+      contentLength = contentSize.width;
+      trailingInset = contentInset.right;
+      scrollOffset = contentOffset.x;
+      viewportLength = layoutMeasurement.width;
     } else {
       contentLength = contentSize.height;
       trailingInset = contentInset.bottom;
@@ -142,5 +148,3 @@ class InfiniteScrollView extends React.Component {
 }
 
 Object.assign(InfiniteScrollView.prototype, ScrollableMixin);
-
-module.exports = InfiniteScrollView;
