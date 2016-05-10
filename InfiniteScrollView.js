@@ -18,8 +18,8 @@ export default class InfiniteScrollView extends React.Component {
     ...ScrollView.propTypes,
     distanceToLoadMore: PropTypes.number.isRequired,
     canLoadMore: PropTypes.bool.isRequired,
-    onLoadError: PropTypes.func,
     onLoadMoreAsync: PropTypes.func.isRequired,
+    onLoadError: PropTypes.func,
     renderLoadingIndicator: PropTypes.func.isRequired,
     renderLoadingErrorIndicator: PropTypes.func.isRequired,
   };
@@ -40,6 +40,7 @@ export default class InfiniteScrollView extends React.Component {
       isDisplayingError: false,
     };
 
+    this._handleScroll = this._handleScroll.bind(this);
     this._loadMoreAsync = this._loadMoreAsync.bind(this);
   }
 
@@ -73,7 +74,7 @@ export default class InfiniteScrollView extends React.Component {
       ...props,
     } = this.props;
     Object.assign(props, {
-      onScroll: this._handleScroll.bind(this),
+      onScroll: this._handleScroll,
       children: [this.props.children, statusIndicator],
     });
 
