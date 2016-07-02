@@ -9,7 +9,7 @@ It conforms to [ScrollableMixin](https://github.com/exponentjs/react-native-scro
 ## Installation
 
 ```sh
-npm install react-native-infinite-scroll-view
+npm install --save react-native-infinite-scroll-view
 ```
 
 ## Usage
