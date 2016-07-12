@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {
-  ActivityIndicatorIOS,
+  ActivityIndicator,
   Platform,
   ProgressBarAndroid,
   StyleSheet,
@@ -15,7 +15,7 @@ export default class DefaultLoadingIndicator extends React.Component {
       <View style={styles.container}>
         {
           Platform.OS === 'ios' ?
-            <ActivityIndicatorIOS /> :
+            <ActivityIndicator /> :
             <ProgressBarAndroid styleAttr="Small" />
         }
       </View>
