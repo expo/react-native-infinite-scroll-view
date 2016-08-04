@@ -1,6 +1,6 @@
 {
   "name": "react-native-infinite-scroll-view",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "An infinitely scrolling view that notifies you as the scroll offset approaches the bottom",
   "main": "InfiniteScrollView.js",
   "scripts": {
