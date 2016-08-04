@@ -21,6 +21,10 @@ export default class InfiniteScrollView extends React.Component {
     onLoadError: PropTypes.func,
     renderLoadingIndicator: PropTypes.func.isRequired,
     renderLoadingErrorIndicator: PropTypes.func.isRequired,
+    canLoadMore: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.boolean
+    ]).isRequired
   };
 
   static defaultProps = {
@@ -95,8 +99,9 @@ export default class InfiniteScrollView extends React.Component {
   }
 
   _shouldLoadMore(event) {
-    
-    var canLoadMore = (typeof this.props.canLoadMore == 'function') ? this.props.canLoadMore() : this.props.canLoadMore;
+    let canLoadMore = (typeof this.props.canLoadMore === 'function') ? 
+      this.props.canLoadMore() :
+      this.props.canLoadMore;
     
     return !this.state.isLoading &&
       canLoadMore &&
