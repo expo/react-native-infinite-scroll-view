@@ -19,7 +19,7 @@ export default class InfiniteScrollView extends React.Component {
     distanceToLoadMore: PropTypes.number.isRequired,
     canLoadMore: PropTypes.oneOfType([
       PropTypes.func,
-      PropTypes.boolean,
+      PropTypes.bool,
     ]).isRequired,
     onLoadMoreAsync: PropTypes.func.isRequired,
     onLoadError: PropTypes.func,
