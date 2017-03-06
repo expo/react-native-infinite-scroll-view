@@ -1,3 +1,7 @@
 module.exports = {
-  extends: 'exponent/react',
+  extends: 'expo/react',
+  rules: {
+    'comma-dangle': [0],
+    'operator-linebreak': [0],
+  },
 };

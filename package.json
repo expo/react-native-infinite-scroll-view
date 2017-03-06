@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/exponentjs/react-native-infinite-scroll-view.git"
+    "url": "git+https://github.com/expo/react-native-infinite-scroll-view.git"
   },
   "keywords": [
     "react-native",
@@ -17,20 +17,24 @@
     "pagination",
     "scroll-view"
   ],
-  "author": "James Ide <ide@exponentjs.com>",
+  "author": "James Ide <ide@expo.io>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/exponentjs/react-native-infinite-scroll-view/issues"
+    "url": "https://github.com/expo/react-native-infinite-scroll-view/issues"
   },
-  "homepage": "https://github.com/exponentjs/react-native-infinite-scroll-view#readme",
+  "homepage": "https://github.com/expo/react-native-infinite-scroll-view#readme",
   "dependencies": {
     "react-clone-referenced-element": "^1.0.1",
     "react-native-scrollable-mixin": "^1.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.4",
-    "eslint": "^2.9.0",
-    "eslint-config-exponent": "^1.0.8",
-    "eslint-plugin-react": "^5.0.1"
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.0.0",
+    "eslint-config-expo": "^5.1.3",
+    "eslint": "^3.12.2",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-flowtype": "^2.29.2",
+    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-import": "^2.2.0"
   }
 }
