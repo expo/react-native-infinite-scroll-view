@@ -22,6 +22,7 @@ export default class InfiniteScrollView extends React.Component {
     ]).isRequired,
     onLoadMoreAsync: PropTypes.func.isRequired,
     onLoadError: PropTypes.func,
+    isLoading: PropTypes.bool,
     renderLoadingIndicator: PropTypes.func.isRequired,
     renderLoadingErrorIndicator: PropTypes.func.isRequired,
   };
@@ -29,9 +30,10 @@ export default class InfiniteScrollView extends React.Component {
   static defaultProps = {
     distanceToLoadMore: 1500,
     canLoadMore: false,
+    isLoading: false,
     scrollEventThrottle: 100,
-    renderLoadingIndicator: () => <DefaultLoadingIndicator />,
-    renderLoadingErrorIndicator: () => <View />,
+    renderLoadingIndicator: () => <DefaultLoadingIndicator/>,
+    renderLoadingErrorIndicator: () => <View/>,
     renderScrollComponent: props => <ScrollView {...props} />,
   };
 
@@ -60,14 +62,14 @@ export default class InfiniteScrollView extends React.Component {
     if (this.state.isDisplayingError) {
       statusIndicator = React.cloneElement(
         this.props.renderLoadingErrorIndicator(
-          { onRetryLoadMore: this._loadMoreAsync }
+          {onRetryLoadMore: this._loadMoreAsync}
         ),
-        { key: 'loading-error-indicator' },
+        {key: 'loading-error-indicator'},
       );
-    } else if (this.state.isLoading) {
+    } else if (this._isLoading()) {
       statusIndicator = React.cloneElement(
         this.props.renderLoadingIndicator(),
-        { key: 'loading-indicator' },
+        {key: 'loading-indicator'},
       );
     }
 
@@ -75,13 +77,16 @@ export default class InfiniteScrollView extends React.Component {
       renderScrollComponent,
       ...props,
     } = this.props;
+
     Object.assign(props, {
       onScroll: this._handleScroll,
       children: [this.props.children, statusIndicator],
     });
 
     return cloneReferencedElement(renderScrollComponent(props), {
-      ref: component => { this._scrollComponent = component; },
+      ref: component => {
+        this._scrollComponent = component;
+      },
     });
   }
 
@@ -102,14 +107,14 @@ export default class InfiniteScrollView extends React.Component {
       this.props.canLoadMore() :
       this.props.canLoadMore;
 
-    return !this.state.isLoading &&
+    return !this._isLoading() &&
       canLoadMore &&
       !this.state.isDisplayingError &&
       this._distanceFromEnd(event) < this.props.distanceToLoadMore;
   }
 
   async _loadMoreAsync() {
-    if (this.state.isLoading && __DEV__) {
+    if (this._isLoading() && __DEV__) {
       throw new Error('_loadMoreAsync called while isLoading is true');
     }
 
@@ -126,7 +131,7 @@ export default class InfiniteScrollView extends React.Component {
     }
   }
 
-  _distanceFromEnd(event): number {
+  _distanceFromEnd(event) {
     let {
       contentSize,
       contentInset,
@@ -151,6 +156,10 @@ export default class InfiniteScrollView extends React.Component {
     }
 
     return contentLength + trailingInset - scrollOffset - viewportLength;
+  }
+
+  _isLoading() {
+    return this.props.isLoading || this.state.isLoading;
   }
 }
 
