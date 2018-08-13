@@ -73,7 +73,7 @@ export default class InfiniteScrollView extends React.Component {
 
     let {
       renderScrollComponent,
-      ...props,
+      ...props
     } = this.props;
     Object.assign(props, {
       onScroll: this._handleScroll,
