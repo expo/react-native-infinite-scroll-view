@@ -1,7 +1,8 @@
 module.exports = {
-  extends: 'expo/react',
-  rules: {
-    'comma-dangle': [0],
-    'operator-linebreak': [0],
+  extends: 'universe/native',
+  settings: {
+    react: {
+      version: '16',
+    },
   },
 };

@@ -1,8 +1,8 @@
-# InfiniteScrollView [![Slack](http://slack.exponentjs.com/badge.svg)](http://slack.exponentjs.com)
+# InfiniteScrollView
 
 InfiniteScrollView is a React Native scroll view that notifies you as the scroll offset approaches the bottom. You can instruct it to display a loading indicator while you load more content. This is a common design in feeds. InfiniteScrollView also supports horizontal scroll views.
 
-It conforms to [ScrollableMixin](https://github.com/exponentjs/react-native-scrollable-mixin) so you can compose it with other scrollable components.
+It conforms to [ScrollableMixin](https://github.com/expo/react-native-scrollable-mixin) so you can compose it with other scrollable components.
 
 [![npm package](https://nodei.co/npm/react-native-infinite-scroll-view.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-native-infinite-scroll-view/)
 
@@ -151,7 +151,7 @@ export default connect(mapStateToProps)(ExampleComponent);
 
 - Horizontal scroll views are supported
 - When you load more content in an infinite ListView, the ListView by default will render only one row per frame. This means that for a short amount of time after loading new content, the user could still be very close to the bottom of the scroll view and may trigger a second load.
-- Known issue: Make sure your initial data reaches the bottom of the screen, otherwise scroll events won't trigger. Subsequent loads are not affected. See [exponentjs/react-native-infinite-scroll-view#9](https://github.com/exponentjs/react-native-infinite-scroll-view/issues/9) for more details.
+- Known issue: Make sure your initial data reaches the bottom of the screen, otherwise scroll events won't trigger. Subsequent loads are not affected. See [expo/react-native-infinite-scroll-view#9](https://github.com/expo/react-native-infinite-scroll-view/issues/9) for more details.
 
 ## Implementation
 

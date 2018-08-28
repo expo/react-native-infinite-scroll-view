@@ -1,11 +1,7 @@
 'use strict';
 
 import React from 'react';
-import {
-  ActivityIndicator,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 export default class DefaultLoadingIndicator extends React.Component {
   render() {
