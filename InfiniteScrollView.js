@@ -81,7 +81,13 @@ export default class InfiniteScrollView extends React.Component {
     });
 
     return cloneReferencedElement(renderScrollComponent(props), {
-      ref: component => { this._scrollComponent = component; },
+      ref: component => {
+        if (component && component._component) {
+          this._scrollComponent = component._component;
+        } else {
+          this._scrollComponent = component; 
+        }
+      },
     });
   }
 
