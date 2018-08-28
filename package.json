@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/expo/react-native-infinite-scroll-view#readme",
   "dependencies": {
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.6.2",
     "react-clone-referenced-element": "^1.0.1",
     "react-native-scrollable-mixin": "^1.0.0"
   },
