@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/react-native-infinite-scroll-view
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-node_modules
+      - run:
+          name: Install npm packages
+          command: yarn
+      - save_cache:
+          key: v1-node_modules
+          paths:
+            - node_modules
+      - run:
+          name: Lint
+          command: yarn lint --max-warnings 0
