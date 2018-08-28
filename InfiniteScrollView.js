@@ -11,6 +11,7 @@ import ScrollableMixin from 'react-native-scrollable-mixin';
 import cloneReferencedElement from 'react-clone-referenced-element';
 
 import DefaultLoadingIndicator from './DefaultLoadingIndicator';
+import getDistanceFromEnd from './distanceFromEnd';
 
 export default class InfiniteScrollView extends React.Component {
   static propTypes = {
@@ -44,6 +45,7 @@ export default class InfiniteScrollView extends React.Component {
 
     this._handleScroll = this._handleScroll.bind(this);
     this._loadMoreAsync = this._loadMoreAsync.bind(this);
+    this._distanceFromEnd = getDistanceFromEnd.bind(this);
   }
 
   getScrollResponder() {
@@ -124,33 +126,6 @@ export default class InfiniteScrollView extends React.Component {
     } finally {
       this.setState({isLoading: false});
     }
-  }
-
-  _distanceFromEnd(event): number {
-    let {
-      contentSize,
-      contentInset,
-      contentOffset,
-      layoutMeasurement,
-    } = event.nativeEvent;
-
-    let contentLength;
-    let trailingInset;
-    let scrollOffset;
-    let viewportLength;
-    if (this.props.horizontal) {
-      contentLength = contentSize.width;
-      trailingInset = contentInset.right;
-      scrollOffset = contentOffset.x;
-      viewportLength = layoutMeasurement.width;
-    } else {
-      contentLength = contentSize.height;
-      trailingInset = contentInset.bottom;
-      scrollOffset = contentOffset.y;
-      viewportLength = layoutMeasurement.height;
-    }
-
-    return contentLength + trailingInset - scrollOffset - viewportLength;
   }
 }
 
